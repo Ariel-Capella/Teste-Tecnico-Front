@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { UserModel } from './Models/user-model';
+import { UserService } from './Services/user-service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'teste-tecnico-confitec-front';
+  public userList: UserModel[];
+
+  constructor (
+    private userService: UserService
+  ) { }
+
+  public onClick(){
+    this.userService.getUserList()
+      .subscribe(
+        data => {
+          this.userList = data;
+        }
+      )
+  }
+
 }
